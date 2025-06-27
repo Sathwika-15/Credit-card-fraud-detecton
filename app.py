@@ -24,7 +24,7 @@ input_data['Time'] = st.number_input("Time", format="%.2f")
 
 # When user clicks the Predict button
 if st.button("🔍 Predict"):
-    input_df = pd.DataFrame([features])
+    input_df = pd.DataFrame([input_data])
 
     # Reorder columns to match training
     expected_cols = ['Time'] + [f'V{i}' for i in range(1, 29)] + ['Amount']
