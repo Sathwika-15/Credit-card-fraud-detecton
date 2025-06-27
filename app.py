@@ -24,10 +24,15 @@ input_data['Time'] = st.number_input("Time", format="%.2f")
 
 # When user clicks the Predict button
 if st.button("🔍 Predict"):
-    input_df = pd.DataFrame([input_data])  # Convert to DataFrame
-    prediction = model.predict(input_df)[0]
+    input_df = pd.DataFrame([features])
 
+    # Reorder columns to match training
+    expected_cols = ['Time'] + [f'V{i}' for i in range(1, 29)] + ['Amount']
+    input_df = input_df[expected_cols]
+
+    prediction = model.predict(input_df)[0]
     if prediction == 1:
         st.error("🚨 Fraud Detected!")
     else:
-        st.success("✅ Transaction is Legitimate")
+        st.success("✅ Transaction is Legit")
+
